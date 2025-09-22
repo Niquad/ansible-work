@@ -1,0 +1,17 @@
+
+# deploy food website app
+
+--- 
+- name: Deploy food website
+  hosts: n2
+  become: yes
+
+  tasks:
+  - name: Update maintenance
+    copy:
+        src: maintenance.html
+        dest: /var/www/html/index.html
+...
+            
+
+  
