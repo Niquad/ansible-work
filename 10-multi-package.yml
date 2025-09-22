@@ -1,0 +1,51 @@
+# Install, start and rnale ttp service
+
+---
+- name: Install HTTP server
+  hosts: g3
+  become: yes
+
+  tasks:
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: present
+        when: ansible_distribution == "Amazon"
+        
+    - name: Start httpd service
+      service:
+            name: httpd
+            state: started
+            when: ansible_distribution == "Amazon"
+
+    - name: Enable httpd service
+      service:
+            name: httpd
+            enabled: yes
+            when: ansible_distribution == "Amazon"
+
+# Install, start and enable http service on ubuntu server
+
+- name: Install apache2
+  become: yes
+
+  tasks:
+      - name: Install apache2
+        apt:
+          name: apache2
+          state: present
+          when: ansible_distribution == "Ubuntu"
+          
+      - name: Start apache2 
+        service:
+              name: apache2
+              state: started
+              when: ansible_distribution == "Ubuntu"
+
+      - name: Enable apache2 
+        service:
+              name: apache2
+              enabled: yes
+              when: ansible_distribution == "Ubuntu"
+          
+          
